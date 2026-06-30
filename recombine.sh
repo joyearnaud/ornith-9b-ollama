@@ -8,8 +8,14 @@ REPO="joyearnaud/ornith-9b-ollama"
 TAG="v1.0"
 
 echo "→ Téléchargement des 3 parts depuis GitHub release $TAG..."
-gh release download "$TAG" --repo "$REPO" --pattern '*.part*' --clobber \
-  || curl -L "https://github.com/$REPO/releases/download/$TAG/ornith-9b-q4_k_m.gguf.part0" -o ornith-9b-q4_k_m.gguf.part0
+if command -v gh &>/dev/null; then
+  gh release download "$TAG" --repo "$REPO" --pattern '*.part*' --clobber
+else
+  BASE="https://github.com/$REPO/releases/download/$TAG"
+  for p in part0 part1 part2; do
+    curl -L "$BASE/ornith-9b-q4_k_m.gguf.$p" -o "ornith-9b-q4_k_m.gguf.$p"
+  done
+fi
 
 echo "→ Recombinaison du GGUF..."
 cat ornith-9b-q4_k_m.gguf.part0 \
