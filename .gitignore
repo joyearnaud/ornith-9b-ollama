@@ -1,0 +1,4 @@
+# Les parts vont dans la release, pas dans le repo git
+*.gguf
+*.gguf.part*
+*.gguf.part
