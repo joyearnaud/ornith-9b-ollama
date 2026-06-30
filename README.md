@@ -5,15 +5,18 @@ Modèle [Ornith 9B](https://ollama.com/library/ornith:9b) (arch qwen3.5, 8.95B p
 ## Au boulot (MacBook Air M4)
 
 ```bash
-# 1. Cloner ce repo (récupère Modelfile + recombine.sh)
+# 1. Cloner ce repo (Modelfile + scripts + configs agents)
 gh repo clone joyearnaud/ornith-9b-ollama
 cd ornith-9b-ollama
 
 # 2. Télécharger les parts + recombiner + créer le modèle Ollama
 ./recombine.sh
 
-# 3. Lancer
+# 3. Lancer en direct
 ollama run ornith:9b
+
+# 4. (optionnel) Brancher pi + opencode sur Ornith
+./setup-agents.sh
 ```
 
 ## Vérification d'intégrité (optionnel)
@@ -22,6 +25,14 @@ ollama run ornith:9b
 # Le GGUF recombiné doit faire exactement 5 629 108 640 octets
 stat -f%z ornith-9b-q4_k_m.gguf   # macOS
 ```
+
+## Coding agents (pi + opencode)
+
+`setup-agents.sh` déploie :
+- **pi** : `pi-ollama-ornith.ts` → `~/.pi/agent/extensions/` (provider Ollama, modèle `ornith:9b`, reasoning Qwen, contexte 32k). Dans pi : `/reload` puis sélectionne `ollama / ornith:9b`.
+- **opencode** : `opencode-config.json` → `~/.config/opencode/opencode.json` (backup `.bak` si existant). Lance `opencode`, sélectionne `Ollama / ornith:9b`.
+
+Contexte limité à 32k (vs 262k natif) pour éviter l'OOM sur 16 Go RAM. Coûts à 0 (modèle local).
 
 ## Notes
 
