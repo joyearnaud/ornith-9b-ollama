@@ -6,6 +6,6 @@ PARAMETER temperature 0.6
 PARAMETER top_k 20
 PARAMETER top_p 0.95
 PARAMETER stop <|im_end|>
-PARAMETER num_ctx 32768
+PARAMETER num_ctx 65536
 # Pour tenter 64k (plus de contexte, risque d'OOM sur 16 Go) :
 # PARAMETER num_ctx 65536

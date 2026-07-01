@@ -29,10 +29,10 @@ stat -f%z ornith-9b-q4_k_m.gguf   # macOS
 ## Coding agents (pi + opencode)
 
 `setup-agents.sh` déploie :
-- **pi** : `pi-ollama-ornith.ts` → `~/.pi/agent/extensions/` (provider Ollama, modèle `ornith:9b`, reasoning Qwen, contexte 32k). Dans pi : `/reload` puis sélectionne `ollama / ornith:9b`.
+- **pi** : `pi-ollama-ornith.ts` → `~/.pi/agent/extensions/` (provider Ollama, modèle `ornith:9b`, contexte 64k). Dans pi : `/reload` puis sélectionne `ollama / ornith:9b`.
 - **opencode** : `opencode-config.json` → `~/.config/opencode/opencode.json` (backup `.bak` si existant). Lance `opencode`, sélectionne `Ollama / ornith:9b`.
 
-Contexte limité à 32k (vs 262k natif) pour éviter l'OOM sur 16 Go RAM. Coûts à 0 (modèle local).
+Contexte limité à 64k (vs 262k natif) pour garder marge RAM sur 16 Go. Coûts à 0 (modèle local).
 
 ## Notes
 
